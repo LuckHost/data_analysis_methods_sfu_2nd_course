@@ -6,7 +6,7 @@ import seaborn as sns
 import missingno as msno
 
 # Загрузка данных
-data = pd.read_csv('./titanic.csv', index_col='PassengerId')
+data = pd.read_csv('titanic.csv', index_col='PassengerId')
 
 # Вывод размера таблицы
 print("Размер таблицы (строки, столбцы):", data.shape)
@@ -118,7 +118,6 @@ print("\n")
 # Визуализация пропусков
 print("Визуализация пропущенных данных:")
 msno.matrix(data)
-plt.show()
 
 # Обработка пропусков
 data.drop('Cabin', axis=1, inplace=True)
@@ -130,35 +129,28 @@ print("\n")
 # Столбчатые диаграммы для категориальных переменных
 print("Столбчатая диаграмма распределения по классам (Pclass):")
 sns.countplot(x='Pclass', data=data)
-plt.show()
 
 # Попарные зависимости признаков
 print("Попарные зависимости признаков:")
 sns.pairplot(data[['Age', 'Fare', 'Pclass', 'Sex', 'SibSp', 'Parch', 'Embarked', 'Survived']])
-plt.show()
 
 # Boxplot зависимости Fare от Pclass
 print("Boxplot зависимости Fare от Pclass:")
 sns.boxplot(x='Pclass', y='Fare', data=data)
-plt.show()
 
 # Соотношение погибших и выживших по полу
 print("Соотношение погибших и выживших по полу:")
 sns.countplot(x='Sex', hue='Survived', data=data)
-plt.show()
 
 # Соотношение погибших и выживших по классу каюты
 print("Соотношение погибших и выживших по классу каюты:")
 sns.countplot(x='Pclass', hue='Survived', data=data)
-plt.show()
 
 # Зависимость выживания от возраста
 print("Зависимость выживания от возраста:")
 sns.boxplot(x='Survived', y='Age', data=data)
-plt.show()
 
 # Корреляционная матрица
 print("Корреляционная матрица:")
 correlation_matrix = data.corr()
 sns.heatmap(correlation_matrix, annot=True)
-plt.show()
